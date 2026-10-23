@@ -29,7 +29,7 @@ export const team: TeamMember[] = [
   {
     id: 'kritagya-gami',
     name: 'Kritagya Gami',
-    role: 'Frontend Developer / QA Engineer',
+    role: 'Co-Founder/Frontend Developer / QA Engineer',
     photo: '/team/kratagya.jpg',
     bio: 'Brings designs to life with fast, responsive and accessible interfaces. They build with React and TypeScript, care about clean, reusable code, and sweat the details that make a site feel smooth on both phones and desktops..',
     skills: ['React', 'TypeScript', 'Accessibility'],
@@ -37,8 +37,8 @@ export const team: TeamMember[] = [
    
   },
   {
-    id: 'aditya-bhati',
-    name: 'Aditya Bhati',
+    id: 'aditya-singh-bhati',
+    name: 'Aditya Singh Bhati',
     role: 'Backend / AI Engineer',
     photo: '/team/aditya.jpg',
     bio: 'Builds the engine behind the product: secure APIs, reliable databases and smart AI features. They connect the system to real data and tools, so the final product is dependable as well as impressive.',
