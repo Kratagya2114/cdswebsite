@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Crafting Digital Solution (CDS) website
 
 React + TypeScript + Vite frontend, Node/Express backend (Nodemailer email + Gemini chatbot).
@@ -42,6 +41,3 @@ All in `client/src/data/`: `services.ts`, `techstack.ts`, `projects.ts` (demo pr
 ## Backend structure
 
 `server/src/`: `index.js` (app), `config.js`, `validation.js` (zod schemas), `routes/forms.js` (contact + feedback), `routes/chat.js`, `services/emailService.js` (Nodemailer), `services/geminiService.js`, `middleware/limits.js` (rate limits). Spam protection: honeypot field, minimum fill time, rate limiting, server-side validation.
-=======
-# cdswebsite
->>>>>>> 3b625c262843624a5104192e81cd1dbf273f44ce
