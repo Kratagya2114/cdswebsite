@@ -24,17 +24,57 @@ export class ChatNotConfiguredError extends Error {
   }
 }
 
-export async function generateReply(messages) {
-  if (!config.gemini.apiKey) throw new ChatNotConfiguredError();
+/**
+ * Intelligent local fallback when Gemini API hits 429 rate limits, quotas, or network issues.
+ * Ensures the website chatbot NEVER fails for visitors.
+ */
+export function getLocalFallbackReply(messages) {
+  const lastUserMsg =
+    [...messages]
+      .reverse()
+      .find((m) => m.role === 'user')
+      ?.content?.trim()
+      ?.toLowerCase() || '';
 
-  const contents = messages.slice(-12).map((m) => ({
-    role: m.role === 'assistant' ? 'model' : 'user',
-    parts: [{ text: m.content }],
-  }));
+  if (/start|project|hire|build|inquiry|contact|reach|touch|work together|get started/i.test(lastUserMsg)) {
+    return "Starting a project with us is super easy! 🚀 Head over to our Contact page (/contact) to share your requirements, or drop an email directly to Keshav at keshavdeepakvyas@gmail.com. We'll review your scope and get back to you within 1–2 business days!";
+  }
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(config.gemini.model)}:generateContent`;
+  if (/service|offer|what do you do|capability|capabilities|develop/i.test(lastUserMsg)) {
+    return "At Crafting Digital Solution (CDS), we specialize in:\n• Full-Stack Web Applications (React, Next.js, Node.js)\n• Mobile Apps (iOS & Android via React Native & Flutter)\n• UI/UX & Figma Product Design\n• Custom AI Agents & Generative AI Solutions\n• ERP & SAP Implementation & Workflows\n• QA & Software Testing Automation\n• Cloud, SEO & Maintenance.\n\nCheck out our Services page for details!";
+  }
+
+  if (/tech|stack|language|framework|python|java|react|node|database|tool/i.test(lastUserMsg)) {
+    return "Our core tech stack includes React, Next.js, TypeScript, Node.js, Python (FastAPI/Django), Java (Spring Boot), React Native, Flutter, PostgreSQL, MongoDB, Figma, and modern AI/LLM tooling. Visit our Tech Stack page to see the full list!";
+  }
+
+  if (/price|cost|charge|budget|rate|estimate|how much/i.test(lastUserMsg)) {
+    return "Our pricing depends on the scope, features, and timeline of your project. We offer flexible project-based and retainer models tailored to startups and established businesses. Tell us about your project on our Contact page (/contact) for a detailed quote!";
+  }
+
+  if (/team|who are you|about|founder|keshav/i.test(lastUserMsg)) {
+    return "Crafting Digital Solution was founded by Keshav Vyas with a mission to help ambitious businesses build meaningful digital experiences. Our team includes engineers, UI/UX designers, and QA experts dedicated to delivering high-impact software.";
+  }
+
+  if (/ai|agent|bot|llm|gpt|gemini|generative/i.test(lastUserMsg)) {
+    return "Yes, absolutely! 🤖 We build custom AI agents, automated workflow assistants, and intelligent integrations using Google Gemini and OpenAI models. Reach out via our Contact page (/contact) to discuss how AI can automate your business!";
+  }
+
+  if (/ca|account|finance|tax|audit|gst/i.test(lastUserMsg)) {
+    return "CDS builds custom software, workflow automation, and digital dashboards for accounting and financial operations. Please note that statutory certifications and formal filings are handled by certified Chartered Accountants.";
+  }
+
+  if (/hello|hi|hey|greetings|morning|evening/i.test(lastUserMsg)) {
+    return "Hey there! 👋 I'm Cody, the CDS digital assistant. How can I help you today? Ask me about our services, tech stack, or how to kick off a new project!";
+  }
+
+  return "Thanks for your message! 😊 At CDS, we build modern web apps, mobile solutions, and custom AI agents. For detailed inquiries or a custom quote, please visit our Contact page (/contact) or email Keshav directly at keshavdeepakvyas@gmail.com!";
+}
+
+async function requestGemini(model, contents, timeoutMs = 8000) {
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`;
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 20000);
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
 
   try {
     const res = await fetch(url, {
@@ -64,3 +104,47 @@ export async function generateReply(messages) {
     clearTimeout(timer);
   }
 }
+
+export async function generateReply(messages) {
+  if (!config.gemini.apiKey) {
+    // If no key configured, immediately use offline knowledge base
+    return getLocalFallbackReply(messages);
+  }
+
+  const contents = messages.slice(-12).map((m) => ({
+    role: m.role === 'assistant' ? 'model' : 'user',
+    parts: [{ text: m.content }],
+  }));
+
+  // Chain of models to try in case of 429 rate limit or temporary unavailability
+  const candidateModels = Array.from(
+    new Set([
+      config.gemini.model,
+      'gemini-3.5-flash-lite',
+      'gemini-3.6-flash',
+      'gemini-flash-latest',
+    ]),
+  ).filter(Boolean);
+
+  let lastError = null;
+
+  for (const model of candidateModels) {
+    try {
+      const reply = await requestGemini(model, contents, 7000);
+      return reply;
+    } catch (err) {
+      lastError = err;
+      console.warn(`[chat] Gemini model ${model} failed (${err.status || err.message}). Trying next fallback...`);
+      // If 429 or 503, immediately try the next model
+      if (err.status === 429 || err.status === 503) {
+        continue;
+      }
+    }
+  }
+
+  // If all Gemini cloud models failed (e.g. daily quota reached or rate limited),
+  // seamlessly serve the user from Cody's local knowledge base!
+  console.warn('[chat] All Gemini models exhausted. Serving local intelligent fallback. Error was:', lastError?.message);
+  return getLocalFallbackReply(messages);
+}
+

@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { chatSchema } from '../validation.js';
-import { generateReply, ChatNotConfiguredError } from '../services/geminiService.js';
+import { generateReply, getLocalFallbackReply } from '../services/geminiService.js';
 import { chatLimiter } from '../middleware/limits.js';
 
 const router = Router();
@@ -18,15 +18,9 @@ router.post('/chat', chatLimiter, async (req, res) => {
     const reply = await generateReply(parsed.data.messages);
     res.json({ ok: true, reply });
   } catch (err) {
-    if (err instanceof ChatNotConfiguredError) {
-      console.error('[chat] GEMINI_API_KEY is not set.');
-      return res.status(503).json({
-        ok: false,
-        error: "I'm not fully switched on yet. Please use the Contact page or email keshavdeepakvyas@gmail.com.",
-      });
-    }
-    console.error('[chat] Gemini error:', err.status || '', err.message, err.detail || '');
-    res.status(502).json({ ok: false, error: 'I had trouble thinking just now. Please try again in a moment.' });
+    console.error('[chat] Handled error in chat route:', err.message);
+    const reply = getLocalFallbackReply(parsed.data.messages);
+    res.json({ ok: true, reply });
   }
 });
 
