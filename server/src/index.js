@@ -20,8 +20,9 @@ app.use(
       // Same-origin requests (site and API served from one host) always pass.
       sameHost = Boolean(origin) && new URL(origin).host === req.headers.host;
     } catch { /* malformed Origin header */ }
-    // Also allow server-to-server (no Origin header) and explicitly configured origins.
-    const allowed = !origin || sameHost || config.clientOrigins.includes(origin);
+    // Also allow server-to-server (no Origin header), local dev, and explicitly configured origins.
+    const isLocalhost = Boolean(origin) && /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);
+    const allowed = !origin || sameHost || isLocalhost || config.clientOrigins.includes(origin);
     if (allowed) return cb(null, { origin: true });
     cb(new Error('Origin not allowed'));
   }),
