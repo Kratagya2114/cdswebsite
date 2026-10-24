@@ -58,18 +58,18 @@ export default function CaseStudy() {
       <Block label="Design direction"><p className="lead">{p.design}</p></Block>
       <Block label="Development & stack"><p className="lead">{p.development}</p><div className="chip-row">{p.stack.map((s) => (<Badge className="chip" key={s}>{s}</Badge>))}</div></Block>
 
-      <Reveal>
-        <section className="section--tight">
-          <div className="container">
-            <span className="eyebrow">Visual gallery</span>
-            <div className="gallery">
-              {p.gallery.map((g) => (
-                <figure key={g.caption}>{g.image ? <img className="shot shot--img" src={g.image} alt={g.caption} loading="lazy" /> : <div className={`shot ${tintClass(g.tint)}`} role="img" aria-label={`${g.caption} (placeholder visual)`}><Icon name={p.glyph} /></div>}<figcaption>{g.caption}</figcaption></figure>
-              ))}
+        {/* <Reveal>
+          <section className="section--tight">
+            <div className="container">
+              <span className="eyebrow">Visual gallery</span>
+              <div className="gallery">
+                {p.gallery.map((g) => (
+                  <figure key={g.caption}>{g.image ? <img className="shot shot--img" src={g.image} alt={g.caption} loading="lazy" /> : <div className={`shot ${tintClass(g.tint)}`} role="img" aria-label={`${g.caption} (placeholder visual)`}><Icon name={p.glyph} /></div>}<figcaption>{g.caption}</figcaption></figure>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
-      </Reveal>
+          </section>
+        </Reveal> */}
 
       {p.results && p.results.length > 0 && <Block label="Results"><ul className="check-list">{p.results.map((r) => (<li key={r}>{r}</li>))}</ul></Block>}
       <Block label="Lessons learned"><ul className="check-list">{p.lessons.map((l) => (<li key={l}>{l}</li>))}</ul></Block>
