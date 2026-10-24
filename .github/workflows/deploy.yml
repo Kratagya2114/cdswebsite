@@ -17,6 +17,7 @@ jobs:
   build-and-deploy:
     name: Build, validate, and deploy
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     steps:
       - name: Checkout repository
@@ -49,51 +50,110 @@ jobs:
           EC2_USER: ${{ secrets.EC2_USER }}
           EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
         run: |
-          set -e
-          test -n "$EC2_HOST"
-          test -n "$EC2_USER"
-          test -n "$EC2_SSH_KEY"
+          set -euo pipefail
+
+          test -n "$EC2_HOST" || {
+            echo "EC2_HOST secret is missing"
+            exit 1
+          }
+
+          test -n "$EC2_USER" || {
+            echo "EC2_USER secret is missing"
+            exit 1
+          }
+
+          test -n "$EC2_SSH_KEY" || {
+            echo "EC2_SSH_KEY secret is missing"
+            exit 1
+          }
 
           mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+
           printf '%s\n' "$EC2_SSH_KEY" > ~/.ssh/ec2.pem
           chmod 600 ~/.ssh/ec2.pem
 
-         ssh-keyscan -v -T 10 -p 22 "$EC2_HOST"
+          ssh-keygen -y -f ~/.ssh/ec2.pem > /dev/null
 
-      - name: Transfer repository files to EC2
+          echo "SSH private key format is valid."
+
+      - name: Verify SSH connectivity
         env:
           EC2_HOST: ${{ secrets.EC2_HOST }}
           EC2_USER: ${{ secrets.EC2_USER }}
         run: |
-          set -e
-          git archive --format=tar HEAD | \
-            ssh -i ~/.ssh/ec2.pem "$EC2_USER@$EC2_HOST" \
-            'tar -xf - -C /var/www/cdswebsite/cdswebsite-main'
+          set -euo pipefail
 
-      - name: Build and restart application on EC2
+          # For production, pin the verified EC2 host key instead
+          # of trusting the first key automatically.
+          ssh \
+            -i ~/.ssh/ec2.pem \
+            -o BatchMode=yes \
+            -o StrictHostKeyChecking=accept-new \
+            -o ConnectTimeout=15 \
+            "$EC2_USER@$EC2_HOST" \
+            "echo SSH_CONNECTED"
+
+      - name: Transfer tracked repository files
         env:
           EC2_HOST: ${{ secrets.EC2_HOST }}
           EC2_USER: ${{ secrets.EC2_USER }}
         run: |
-          ssh -i ~/.ssh/ec2.pem "$EC2_USER@$EC2_HOST" 'bash -s' <<'REMOTE'
-            set -e
-            cd /var/www/cdswebsite/cdswebsite-main
+          set -euo pipefail
 
-            # Never deploy if the server environment file is missing.
-            test -f server/.env
+          git archive --format=tar HEAD |
+            ssh \
+              -i ~/.ssh/ec2.pem \
+              -o BatchMode=yes \
+              -o StrictHostKeyChecking=accept-new \
+              "$EC2_USER@$EC2_HOST" \
+              'tar -xf - -C /var/www/cdswebsite/cdswebsite-main'
 
-            npm ci --prefix client
-            npm run build
-            npm ci --prefix server
+      - name: Build and restart on EC2
+        env:
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_USER: ${{ secrets.EC2_USER }}
+        run: |
+          set -euo pipefail
 
-            pm2 restart cdswebsite-api --update-env
-            pm2 save
+          ssh \
+            -i ~/.ssh/ec2.pem \
+            -o BatchMode=yes \
+            -o StrictHostKeyChecking=accept-new \
+            "$EC2_USER@$EC2_HOST" 'bash -se' <<'REMOTE'
 
-            sudo nginx -t
-            sudo systemctl reload nginx
+          set -euo pipefail
+          cd /var/www/cdswebsite/cdswebsite-main
 
-            curl --fail --silent --show-error \
-              http://127.0.0.1:5000/api/health
-            curl --fail --silent --show-error \
-              --output /dev/null http://127.0.0.1/
+          # Preserve the server-side environment configuration.
+          test -f server/.env || {
+            echo "ERROR: server/.env is missing; stopping deployment."
+            exit 1
+          }
+
+          npm ci --prefix client
+          npm run build
+          npm ci --prefix server
+
+          pm2 restart cdswebsite-api --update-env
+          pm2 save
+
+          sudo nginx -t
+          sudo systemctl reload nginx
+
+          echo "Checking backend health..."
+          curl --fail --silent --show-error \
+            http://127.0.0.1:5000/api/health
+
+          echo
+          echo "Checking Nginx..."
+          curl --fail --silent --show-error \
+            --output /dev/null \
+            http://127.0.0.1/
+
+          echo "Deployment and health checks completed."
           REMOTE
+
+      - name: Remove SSH private key
+        if: always()
+        run: rm -f ~/.ssh/ec2.pem
