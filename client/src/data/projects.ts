@@ -8,30 +8,58 @@ import type { Project } from './types';
 const demoLesson = 'Replace this with a real lesson learned from the actual project.';
 
 export const projects: Project[] = [
-  {
-    slug: 'sample-clinic-booking',
-    title: 'Clinic Booking Website',
-    category: 'Websites',
+  // ---- COPY THIS TEMPLATE FOR EACH REAL PROJECT (put it at the top of the list) ----
+  // {
+  //   slug: 'my-project',                       // used in the URL: /work/my-project
+  //   title: 'My Project Name',
+  //   category: 'Web Applications',             // Websites | Web Applications | E-commerce | UI/UX | Branding
+  //   industry: 'Education',
+  //   services: ['Full-stack development', 'UI/UX'],
+  //   summary: 'One line about what it does.',
+  //   tint: 'sky',                              // fallback colour if no image
+  //   glyph: 'code',                            // fallback icon if no image
+  //   image: '/projects/my-project/cover.jpg',  // file in client/public/projects/my-project/
+  //   liveUrl: 'https://my-project.vercel.app', // optional
+  //   repoUrl: 'https://github.com/Kratagya2114/my-project', // optional
+  //   isDemo: false,
+  //   overview: 'Short overview.',
+  //   clientType: 'College project / Personal project / Client name',
+  //   challenge: 'What problem it solves.',
+  //   goals: ['Goal 1', 'Goal 2'],
+  //   strategy: 'How you planned it.',
+  //   design: 'Design approach.',
+  //   development: 'How you built it.',
+  //   stack: ['React', 'Node.js', 'MongoDB'],
+  //   gallery: [
+  //     { caption: 'Home page', tint: 'sky', image: '/projects/my-project/1.jpg' },
+  //     { caption: 'Dashboard', tint: 'mist', image: '/projects/my-project/2.jpg' },
+  //   ],
+  //   lessons: ['What you learned.'],
+  // },
+    {
+    slug: 'clinic',
+    title: 'Clinic Booking System',
+    category: 'Web Applications',
     industry: 'Healthcare',
-    services: ['Website design', 'Development', 'SEO setup'],
-    summary: 'Concept: a calm, fast website that helps patients find services and book appointments.',
+    services: ['Full-stack development', 'UI/UX'],
+    summary: 'A clinic website where patients can view services and book appointments online.',
     tint: 'sky',
     glyph: 'stethoscope',
-    isDemo: true,
-    overview: 'An illustrative concept showing how a local clinic site could be structured around booking.',
-    clientType: 'Local clinic (sample concept)',
-    challenge: 'Patients struggle to find opening hours, services and a quick way to book.',
-    goals: ['Make booking a two-step action', 'Work well on low-end phones', 'Keep content easy for staff to edit'],
-    strategy: 'Map the top patient questions, then structure pages around answering them quickly.',
-    design: 'Soft pastel palette, large tap targets, plain-language copy and clear contact actions.',
-    development: 'Static-first React build with a simple form backend and structured data for local search.',
-    stack: ['React', 'TypeScript', 'Node.js', 'Nodemailer'],
+    image: '/projects/clinic/home.png',
+    liveUrl: 'https://apex-care-clinic-react-apex-care-cl.vercel.app',
+    isDemo: false,
+    overview: 'A responsive clinic website with an easy appointment booking flow.',
+    clientType: 'Personal project',
+    challenge: 'Patients needed a quick way to find services and book an appointment.',
+    goals: ['Make booking simple', 'Work well on phones'],
+    strategy: 'Map the main patient questions, then structure the pages around them.',
+    design: 'Clean layout, clear buttons and easy-to-read text.',
+    development: 'Built with React and a simple booking form.',
+    stack: ['React', 'Node.js', 'MongoDB'],
     gallery: [
-      { caption: 'Home — services and booking', tint: 'sky' },
-      { caption: 'Service detail page', tint: 'mist' },
-      { caption: 'Booking form', tint: 'lilac' },
+      { caption: 'Home page', tint: 'sky', image: '/projects/clinic/home.png' },
     ],
-    lessons: [demoLesson],
+    lessons: ['Keep the booking steps as few as possible.'],
   },
   {
     slug: 'sample-inventory-dashboard',

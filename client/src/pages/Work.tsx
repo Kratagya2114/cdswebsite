@@ -11,7 +11,9 @@ export default function Work() {
     <div className="page">
       <Seo path="/work" />
       <PageHero eyebrow="Our work" title="Selected projects & case studies." lead="A look at how we approach different kinds of problems.">
-        <p className="note" style={{ marginTop: 18, maxWidth: 640 }}>The projects shown are <strong>illustrative demo concepts</strong> marked as such. They are not real client work and will be replaced as genuine case studies are added.</p>
+        {projects.some((p) => p.isDemo) && (
+          <p className="note" style={{ marginTop: 18, maxWidth: 640 }}>The projects shown are <strong>illustrative demo concepts</strong> marked as such. They are not real client work and will be replaced as genuine case studies are added.</p>
+        )}
       </PageHero>
       <section className="section--tight">
         <div className="container">
