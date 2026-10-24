@@ -61,10 +61,10 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
   return (
     <Reveal delay={(index % 3) * 70}>
       <Link to={`/work/${project.slug}`} className="project" aria-label={`${project.title} — view case study`}>
-        <div className={`project__cover ${tintClass(project.tint)}`}>
+        <div className={`project__cover ${project.image ? 'project__cover--img' : ''} ${tintClass(project.tint)}`}>
           <span className="project__index">/{String(index + 1).padStart(2, '0')}</span>
           {project.isDemo && <span className="project__demo badge-demo">Illustrative demo</span>}
-          <span className="glyph" aria-hidden="true"><Icon name={project.glyph} /></span>
+          {project.image ? <img src={project.image} alt={`${project.title} preview`} loading="lazy" /> : <span className="glyph" aria-hidden="true"><Icon name={project.glyph} /></span>}
         </div>
         <div className="project__meta">
           <h3>{project.title}</h3>
@@ -183,3 +183,5 @@ export function CtaBanner({ title = 'Have something good in mind?', text = "Tell
     </section>
   );
 }
+
+

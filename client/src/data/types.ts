@@ -35,6 +35,9 @@ export interface Project {
   summary: string;
   tint: Tint;
   glyph: string;
+  image?: string; // cover screenshot under /public, e.g. "/projects/my-app/cover.jpg"
+  liveUrl?: string;
+  repoUrl?: string;
   isDemo: boolean; // true = illustrative sample, NOT real client work
   overview: string;
   clientType: string;
@@ -44,7 +47,7 @@ export interface Project {
   design: string;
   development: string;
   stack: string[];
-  gallery: { caption: string; tint: Tint }[];
+  gallery: { caption: string; tint: Tint; image?: string }[];
   results?: string[]; // only add REAL, verified results
   lessons: string[];
 }

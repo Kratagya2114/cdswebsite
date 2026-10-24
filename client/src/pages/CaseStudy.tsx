@@ -1,3 +1,4 @@
+import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
 import Icon from '../components/Icon';
 import { Link, useParams } from 'react-router-dom';
@@ -38,9 +39,15 @@ export default function CaseStudy() {
 
       <section>
         <div className="container">
-          <div className={`project__cover project__cover--wide ${tintClass(p.tint)}`}>
-            <span className="glyph" aria-hidden="true"><Icon name={p.glyph} /></span>
+          <div className={`project__cover project__cover--wide ${p.image ? 'project__cover--img' : ''} ${tintClass(p.tint)}`}>
+            {p.image ? <img src={p.image} alt={`${p.title} preview`} /> : <span className="glyph" aria-hidden="true"><Icon name={p.glyph} /></span>}
           </div>
+          {(p.liveUrl || p.repoUrl) && (
+            <div className="chip-row" style={{ marginTop: 18 }}>
+              {p.liveUrl && <Button size="sm" asChild><a href={p.liveUrl} target="_blank" rel="noopener noreferrer">View live site <Icon name="upright" /></a></Button>}
+              {p.repoUrl && <Button variant="outline" size="sm" asChild><a href={p.repoUrl} target="_blank" rel="noopener noreferrer">Source code <Icon name="upright" /></a></Button>}
+            </div>
+          )}
         </div>
       </section>
 
@@ -57,7 +64,7 @@ export default function CaseStudy() {
             <span className="eyebrow">Visual gallery</span>
             <div className="gallery">
               {p.gallery.map((g) => (
-                <figure key={g.caption}><div className={`shot ${tintClass(g.tint)}`} role="img" aria-label={`${g.caption} (placeholder visual)`}>{p.glyph}</div><figcaption>{g.caption}</figcaption></figure>
+                <figure key={g.caption}>{g.image ? <img className="shot shot--img" src={g.image} alt={g.caption} loading="lazy" /> : <div className={`shot ${tintClass(g.tint)}`} role="img" aria-label={`${g.caption} (placeholder visual)`}><Icon name={p.glyph} /></div>}<figcaption>{g.caption}</figcaption></figure>
               ))}
             </div>
           </div>
