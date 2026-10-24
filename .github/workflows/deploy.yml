@@ -14,8 +14,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build:
-    name: Build frontend and validate backend
+  build-and-deploy:
+    name: Build, validate, and deploy
     runs-on: ubuntu-latest
 
     steps:
@@ -42,3 +42,56 @@ jobs:
 
       - name: Validate backend syntax
         run: node --check server/src/index.js
+
+      - name: Configure SSH
+        env:
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_USER: ${{ secrets.EC2_USER }}
+          EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+        run: |
+          set -e
+          test -n "$EC2_HOST"
+          test -n "$EC2_USER"
+          test -n "$EC2_SSH_KEY"
+          mkdir -p ~/.ssh
+          printf '%s\n' "$EC2_SSH_KEY" > ~/.ssh/ec2.pem
+          chmod 600 ~/.ssh/ec2.pem
+          ssh-keyscan -H "$EC2_HOST" >> ~/.ssh/known_hosts
+
+      - name: Transfer repository files to EC2
+        env:
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_USER: ${{ secrets.EC2_USER }}
+        run: |
+          set -e
+          git archive --format=tar HEAD | \
+            ssh -i ~/.ssh/ec2.pem "$EC2_USER@$EC2_HOST" \
+            'tar -xf - -C /var/www/cdswebsite/cdswebsite-main'
+
+      - name: Build and restart application on EC2
+        env:
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_USER: ${{ secrets.EC2_USER }}
+        run: |
+          ssh -i ~/.ssh/ec2.pem "$EC2_USER@$EC2_HOST" 'bash -s' <<'REMOTE'
+            set -e
+            cd /var/www/cdswebsite/cdswebsite-main
+
+            # Never deploy if the server environment file is missing.
+            test -f server/.env
+
+            npm ci --prefix client
+            npm run build
+            npm ci --prefix server
+
+            pm2 restart cdswebsite-api --update-env
+            pm2 save
+
+            sudo nginx -t
+            sudo systemctl reload nginx
+
+            curl --fail --silent --show-error \
+              http://127.0.0.1:5000/api/health
+            curl --fail --silent --show-error \
+              --output /dev/null http://127.0.0.1/
+          REMOTE
