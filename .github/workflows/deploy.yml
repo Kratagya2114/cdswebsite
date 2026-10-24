@@ -58,8 +58,7 @@ jobs:
           printf '%s\n' "$EC2_SSH_KEY" > ~/.ssh/ec2.pem
           chmod 600 ~/.ssh/ec2.pem
 
-          ssh-keyscan -T 10 -p 22 "$EC2_HOST" \
-            >> ~/.ssh/known_hosts 2>&1
+         ssh-keyscan -v -T 10 -p 22 "$EC2_HOST"
 
       - name: Transfer repository files to EC2
         env:
