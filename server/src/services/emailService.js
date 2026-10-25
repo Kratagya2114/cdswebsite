@@ -66,7 +66,7 @@ const shell = (title, badge, body, actionBtn = '') => `<!DOCTYPE html PUBLIC "-/
                 <tr>
                   <td>
                     <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#A99BFF;margin-bottom:6px;">
-                      Crafting Digital Solution · CDS
+                      Infincode
                     </div>
                     <div style="font-size:20px;font-weight:700;line-height:1.25;color:#ffffff;letter-spacing:-0.01em;">
                       ${esc(title)}
@@ -100,7 +100,7 @@ const shell = (title, badge, body, actionBtn = '') => `<!DOCTYPE html PUBLIC "-/
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td style="color:#7A7491;font-size:12px;">
-                    <strong style="color:#1B1730;">Crafting Digital Solution</strong> · Website Notifications
+                    <strong style="color:#1B1730;">Infincode</strong> · Website Notifications
                   </td>
                   <td align="right" class="mobile-hide" style="color:#A19BB5;font-size:11px;">
                     Reply directly to client
@@ -128,7 +128,7 @@ async function send(mail) {
 
 export async function sendInquiry(data) {
   const initial = (data.name || 'C').trim().charAt(0).toUpperCase();
-  const replySubject = encodeURIComponent(`Re: ${data.projectType || 'Project'} Inquiry — Crafting Digital Solution`);
+  const replySubject = encodeURIComponent(`Re: ${data.projectType || 'Project'} Inquiry — Infincode`);
   const replyMailto = `mailto:${encodeURIComponent(data.email)}?subject=${replySubject}`;
 
   const body = `
@@ -235,7 +235,7 @@ export async function sendInquiry(data) {
     .join('\n');
 
   return send({
-    from: `"CDS Website" <${config.smtp.sender}>`,
+    from: `"Infincode Website" <${config.smtp.sender}>`,
     to: config.smtp.receiver,
     replyTo: `"${data.name.replace(/"/g, '')}" <${data.email}>`,
     subject: `New inquiry: ${data.projectType} — ${data.name}`,
@@ -247,7 +247,7 @@ export async function sendInquiry(data) {
 export async function sendFeedback(data) {
   const initial = (data.name || 'C').trim().charAt(0).toUpperCase();
   const stars = '★'.repeat(Math.max(1, Math.min(5, Number(data.rating) || 5)));
-  const replySubject = encodeURIComponent(`Thank you for your feedback — Crafting Digital Solution`);
+  const replySubject = encodeURIComponent(`Thank you for your feedback — Infincode`);
   const replyMailto = `mailto:${encodeURIComponent(data.email)}?subject=${replySubject}`;
 
   const body = `
@@ -322,7 +322,7 @@ export async function sendFeedback(data) {
   const html = shell('New Client Feedback', `${data.rating}/5 Stars`, body, actionBtn);
 
   return send({
-    from: `"CDS Website" <${config.smtp.sender}>`,
+    from: `"Infincode Website" <${config.smtp.sender}>`,
     to: config.smtp.receiver,
     replyTo: `"${data.name.replace(/"/g, '')}" <${data.email}>`,
     subject: `New client feedback (${data.rating}/5) — ${data.name}`,
@@ -342,8 +342,8 @@ export async function sendAcknowledgment(data, kind = 'inquiry') {
     <div style="font-size:15px;line-height:1.65;color:#4A4560;margin-bottom:18px;">
       ${
         isFeedback
-          ? 'Thank you for taking the time to share your feedback with Crafting Digital Solution! Your thoughts and experience help us constantly improve the quality of our service and software.'
-          : 'Thank you for reaching out to Crafting Digital Solution! We have received your project inquiry and our team is already reviewing the details.'
+          ? 'Thank you for taking the time to share your feedback with Infincode! Your thoughts and experience help us constantly improve the quality of our service and software.'
+          : 'Thank you for reaching out to Infincode! We have received your project inquiry and our team is already reviewing the details.'
       }
     </div>
 
@@ -378,8 +378,8 @@ export async function sendAcknowledgment(data, kind = 'inquiry') {
 
     <div style="font-size:14px;line-height:1.6;color:#6B6683;margin-top:16px;">
       Warm regards,<br />
-      <strong style="color:#1B1730;font-size:15px;">Keshav Vyas &amp; the CDS Team</strong><br />
-      Crafting Digital Solution<br />
+      <strong style="color:#1B1730;font-size:15px;">Keshav Vyas &amp; the Infincode Team</strong><br />
+      Infincode<br />
       <a href="https://craftingdigitalsolution.com" style="color:#5B4BFF;text-decoration:none;font-size:13px;">craftingdigitalsolution.com</a>
     </div>
   `;
@@ -391,16 +391,15 @@ export async function sendAcknowledgment(data, kind = 'inquiry') {
   );
 
   return send({
-    from: `"Crafting Digital Solution" <${config.smtp.sender}>`,
+    from: `"Infincode" <${config.smtp.sender}>`,
     to: data.email,
     replyTo: config.smtp.receiver,
-    subject: isFeedback ? 'Thanks for your feedback — CDS' : 'We received your inquiry — CDS',
+    subject: isFeedback ? 'Thanks for your feedback — Infincode' : 'We received your inquiry — Infincode',
     html,
     text: `Hi ${first},\n\n${
       isFeedback
-        ? 'Thank you for sharing your feedback with Crafting Digital Solution.'
-        : 'Thanks for reaching out to Crafting Digital Solution. We have received your inquiry and will reply within one to two working days.'
+        ? 'Thank you for sharing your feedback with Infincode.'
+        : 'Thanks for reaching out to Infincode. We have received your inquiry and will reply within one to two working days.'
     }\n\n— Keshav Vyas & team`,
   });
 }
-

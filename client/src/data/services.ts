@@ -199,7 +199,7 @@ export const services: Service[] = [
     deliverables: ['Invoice and bill data extraction', 'Excel / Tally data workflows', 'Client document collection portal', 'Deadline and reminder automation', 'Reports and dashboards'],
     process: ['Map the current workflow', 'Pick the highest-effort tasks', 'Automate and test with real files', 'Train your team'],
     tech: ['Python', 'Excel automation', 'Tally data workflows', 'Web portals', 'AI document extraction'],
-    note: 'CDS builds software and automation. Statutory filings, audits and certifications must be handled by a practicing Chartered Accountant.',
+    note: 'Infincode builds software and automation. Statutory filings, audits and certifications must be handled by a practicing Chartered Accountant.',
   },
   {
     slug: 'branding-creative',

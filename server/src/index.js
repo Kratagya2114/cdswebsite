@@ -57,7 +57,7 @@ app.use((err, _req, res, _next) => {
 });
 
 app.listen(config.port, () => {
-  console.log(`CDS server listening on :${config.port}`);
+  console.log(`Infincode server listening on :${config.port}`);
   console.log(`  email: ${emailConfigured() ? 'configured' : 'NOT configured (set SMTP_* in .env)'}`);
   console.log(`  chat : ${chatConfigured() ? 'configured' : 'NOT configured (set GEMINI_API_KEY in .env)'}`);
 });

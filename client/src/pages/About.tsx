@@ -9,9 +9,9 @@ import { team } from '../data/team';
 
 /** EDIT ME — the founder story. Rewrite freely so it matches the real journey. */
 const story = [
-  `Crafting Digital Solution began with a simple frustration. Too many business owners were being handed websites and software they couldn’t understand, couldn’t update and couldn’t reach anyone about once the invoice was paid.`,
-  `${site.founder} started CDS to do it differently: a small, young team that builds with modern tools, explains every decision in plain language, and stays around after launch. The idea was never to be the biggest agency, but the one clients actually enjoy working with.`,
-  `Today CDS covers the full journey, from design and development to testing, AI automation, ERP work and growth, because real businesses don’t have a “frontend problem” or a “backend problem”. They have goals. We start there, and work backwards to the technology.`,
+  `Infincode began with a simple frustration. Too many business owners were being handed websites and software they couldn’t understand, couldn’t update and couldn’t reach anyone about once the invoice was paid.`,
+  `${site.founder} started Infincode to do it differently: a small, young team that builds with modern tools, explains every decision in plain language, and stays around after launch. The idea was never to be the biggest agency, but the one clients actually enjoy working with.`,
+  `Today Infincode covers the full journey, from design and development to testing, AI automation, ERP work and growth, because real businesses don’t have a “frontend problem” or a “backend problem”. They have goals. We start there, and work backwards to the technology.`,
 ];
 
 const differences = [
@@ -33,7 +33,7 @@ export default function About() {
 
       <section className="section--tight">
         <div className="container split">
-          <div><span className="eyebrow">Our story</span><h2>Why CDS exists</h2></div>
+          <div><span className="eyebrow">Our story</span><h2>Why Infincode exists</h2></div>
           <div className="story">
             {story.map((p, i) => (<Reveal key={i} delay={i * 80}><p>{p}</p></Reveal>))}
             <p style={{ fontWeight: 600, color: 'var(--ink)' }}>— {site.founder}, Founder</p>
@@ -85,7 +85,7 @@ export default function About() {
 
       <section className="section">
         <div className="container">
-          <SectionHead eyebrow="Team" title="The people behind CDS"><Link to="/team" className="link-arrow">Full team <Icon name="upright" /></Link></SectionHead>
+          <SectionHead eyebrow="Team" title="The people behind Infincode"><Link to="/team" className="link-arrow">Full team <Icon name="upright" /></Link></SectionHead>
           <TeamGrid members={team.slice(0, 3)} />
         </div>
       </section>

@@ -133,7 +133,7 @@ export function ReviewCard({ r }: { r: Review }) {
   );
 }
 
-/** Shows genuine reviews if any exist; otherwise shows how working with CDS looks (never invented testimonials). */
+/** Shows genuine reviews if any exist; otherwise shows what working with Infincode looks like (never invented testimonials). */
 export function ReviewsBlock({ limit }: { limit?: number }) {
   const list = limit ? reviews.slice(0, limit) : reviews;
   if (list.length > 0) {
@@ -183,5 +183,4 @@ export function CtaBanner({ title = 'Have something good in mind?', text = "Tell
     </section>
   );
 }
-
 

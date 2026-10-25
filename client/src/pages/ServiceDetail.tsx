@@ -21,7 +21,7 @@ export default function ServiceDetail() {
   return (
     <div className="page">
       <div className="breadcrumb" style={{ marginTop: 16 , padding: 16 }}><Link to="/services"><Icon name="left" /> All services</Link></div>
-      <Seo title={`${s.name} — CDS`} description={s.summary} />
+      <Seo title={`${s.name} — Infincode`} description={s.summary} />
       <PageHero eyebrow={s.category} title={s.name} lead={s.summary}>
         
         <div className="ctas" style={{ marginTop: 8 }}>

@@ -8,7 +8,7 @@ interface Msg extends ChatMessage {
 
 const GREETING: Msg = {
   role: 'assistant',
-  content: "Hey! I'm Cody, CDS's assistant. Ask me about our services, tech stack, or how to start a project.",
+  content: "Hey! I'm Cody, Infincode's assistant. Ask me about our services, tech stack, or how to start a project.",
 };
 
 const SUGGESTIONS = ['What services do you offer?', 'Can you build an AI agent?', 'Which languages do you use?', 'How do I start a project?'];
@@ -28,7 +28,7 @@ export default function Chatbot() {
   useEffect(() => {
     let dismissed = false;
     try {
-      dismissed = sessionStorage.getItem('cds-chat-nudge') === '1';
+      dismissed = sessionStorage.getItem('infincode-chat-nudge') === '1';
     } catch { /* storage unavailable */ }
     if (dismissed) return;
     const t = window.setTimeout(() => setNudge(true), 2500);
@@ -37,7 +37,7 @@ export default function Chatbot() {
 
   const dismissNudge = () => {
     setNudge(false);
-    try { sessionStorage.setItem('cds-chat-nudge', '1'); } catch { /* ignore */ }
+    try { sessionStorage.setItem('infincode-chat-nudge', '1'); } catch { /* ignore */ }
   };
 
   useEffect(() => {
@@ -88,12 +88,12 @@ export default function Chatbot() {
 
   return (
     <div className="chat-root">
-      <section id="chat-panel" className="chat-panel" role="dialog" aria-label="CDS assistant chat" hidden={!open}>
+      <section id="chat-panel" className="chat-panel" role="dialog" aria-label="Infincode assistant chat" hidden={!open}>
         <div className="chat-head">
           <span className="bot" aria-hidden="true"><Icon name="bot" /></span>
           <div>
-            <strong>Cody · CDS Assistant</strong>
-            <small>AI assistant — ask anything about CDS</small>
+            <strong>Cody · Infincode Assistant</strong>
+            <small>AI assistant — ask anything about Infincode</small>
           </div>
           <button className="close" onClick={toggle} aria-label="Close chat"><Icon name="close" /></button>
         </div>

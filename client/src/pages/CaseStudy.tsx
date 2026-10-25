@@ -24,7 +24,7 @@ export default function CaseStudy() {
 
   return (
     <div className="page">
-      <Seo title={`${p.title} — Case study | CDS`} description={p.summary} />
+      <Seo title={`${p.title} — Case study | Infincode`} description={p.summary} />
       <section className="page-hero">
         <div className="container">
           <div className="breadcrumb"><Link to="/work"><Icon name="left" /> All work</Link></div>

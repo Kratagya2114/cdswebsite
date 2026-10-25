@@ -6,12 +6,9 @@ import { nav } from '../data/site';
 
 export function Logo() {
   return (
-    <Link to="/" className="logo" aria-label="Crafting Digital Solution — home">
-      <span className="logo__mark" aria-hidden="true">CDS</span>
-      <span className="logo__text">
-        Crafting
-        <small>Digital Solution</small>
-      </span>
+    <Link to="/" className="logo" aria-label="Infincode — home">
+      <img className="logo__mark" src="/infincode-mark.png" alt="" aria-hidden="true" />
+      <img className="logo__wordmark" src="/infincode-wordmark.png" alt="Infincode" />
     </Link>
   );
 }

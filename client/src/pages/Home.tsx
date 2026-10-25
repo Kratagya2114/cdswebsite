@@ -33,10 +33,10 @@ export default function Home() {
           </div>
           <div className="hero-visual" aria-hidden="true">
             <div className="code-window">
-              <div className="code-window__bar"><i /><i /><i /><span>cds.config.ts</span></div>
+              <div className="code-window__bar"><i /><i /><i /><span>infincode.config.ts</span></div>
               <pre>
 {`const `}<span className="k">studio</span>{` = {
-  name: `}<span className="s">"Crafting Digital Solution"</span>{`,
+  name: `}<span className="s">"Infincode"</span>{`,
   builds: [`}<span className="s">"web"</span>{`, `}<span className="s">"apps"</span>{`, `}<span className="s">"AI agents"</span>{`],
   quality: `}<span className="s">"tested, always"</span>{`,
   vibe: `}<span className="s">"modern & human"</span>{`,
@@ -63,7 +63,7 @@ ship(`}<span className="k">idea</span>{`)`}<span className="caret" />
       {/* Why choose us */}
       <section className="section" id="why-us">
         <div className="container">
-          <SectionHead eyebrow="Why choose us" title="Six reasons teams pick CDS" />
+          <SectionHead eyebrow="Why choose us" title="Six reasons teams pick Infincode" />
           <div className="grid grid--3">
             {whyChooseUs.map((w, i) => (
               <Reveal key={w.title} delay={(i % 3) * 70}>
@@ -141,11 +141,11 @@ ship(`}<span className="k">idea</span>{`)`}<span className="caret" />
       <section className="section section--tinted">
         <div className="container split">
           <div>
-            <span className="eyebrow">About CDS</span>
+            <span className="eyebrow">About Infincode</span>
             <p className="statement"><span>We’re not here to add another website to the internet.</span> We’re here to build something that works.</p>
           </div>
           <div>
-            <p className="lead">Thoughtful design, dependable engineering, honest collaboration and measurable business value — that’s the whole philosophy. CDS was founded by {site.founder} to give ambitious businesses a technology partner they can actually talk to.</p>
+            <p className="lead">Thoughtful design, dependable engineering, honest collaboration and measurable business value — that’s the whole philosophy. Infincode was founded by {site.founder} to give ambitious businesses a technology partner they can actually talk to.</p>
             <Link to="/about" className="link-arrow">Read our story <Icon name="upright" /></Link>
           </div>
         </div>

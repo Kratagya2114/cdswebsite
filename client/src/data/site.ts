@@ -1,7 +1,7 @@
 export const site = {
-  name: 'Crafting Digital Solution',
-  short: 'CDS',
-  tagline: 'We turn ambitious ideas into meaningful digital experiences.',
+  name: 'Infincode',
+  short: 'Infincode',
+  tagline: 'Where code meets infinite possibilities.',
   email: 'keshavdeepakvyas@gmail.com',
   founder: 'Keshav Vyas',
   // Add real profile URLs here. Empty ones are simply not rendered.
@@ -54,15 +54,15 @@ export const values = [
 
 export const pageMeta: Record<string, { title: string; description: string }> = {
   '/': {
-    title: 'Crafting Digital Solution (CDS) — Web, App, AI & ERP Services',
-    description: 'CDS turns ambitious ideas into meaningful digital experiences: web, mobile apps, UI/UX, QA, AI agents, ERP/SAP, SEO and more.',
+    title: 'Infincode — Web, App, AI & ERP Services',
+    description: 'Infincode designs and builds digital experiences: web, mobile apps, UI/UX, QA, AI agents, ERP/SAP, SEO and more.',
   },
-  '/services': { title: 'Services — CDS', description: 'Web, app, UI/UX, QA, AI agents, Gen AI, ERP, SAP, SEO, digital marketing, Python, Java and CA automation services from CDS.' },
-  '/tech-stack': { title: 'Languages & Frameworks — CDS', description: 'The programming languages, frameworks and tools CDS works with across web, mobile, AI, ERP and QA.' },
-  '/work': { title: 'Our Work — CDS', description: 'Selected projects and case studies from Crafting Digital Solution.' },
-  '/reviews': { title: 'Client Feedback — CDS', description: 'What clients say about working with Crafting Digital Solution, and how to share your own feedback.' },
-  '/team': { title: 'Our Team — CDS', description: 'Meet the people behind Crafting Digital Solution.' },
-  '/about': { title: 'About Us — CDS', description: 'The story, mission and values behind Crafting Digital Solution, founded by Keshav Vyas.' },
-  '/contact': { title: 'Start a Project — CDS', description: 'Tell us what you are building. Start a project with Crafting Digital Solution.' },
-  '/privacy': { title: 'Privacy Policy — CDS', description: 'How Crafting Digital Solution handles your information.' },
+  '/services': { title: 'Services — Infincode', description: 'Web, app, UI/UX, QA, AI agents, Gen AI, ERP, SAP, SEO, digital marketing, Python, Java and CA automation services from Infincode.' },
+  '/tech-stack': { title: 'Languages & Frameworks — Infincode', description: 'The programming languages, frameworks and tools Infincode works with across web, mobile, AI, ERP and QA.' },
+  '/work': { title: 'Our Work — Infincode', description: 'Selected projects and case studies from Infincode.' },
+  '/reviews': { title: 'Client Feedback — Infincode', description: 'What clients say about working with Infincode, and how to share your own feedback.' },
+  '/team': { title: 'Our Team — Infincode', description: 'Meet the people behind Infincode.' },
+  '/about': { title: 'About Us — Infincode', description: 'The story, mission and values behind Infincode, founded by Keshav Vyas.' },
+  '/contact': { title: 'Start a Project — Infincode', description: 'Tell us what you are building. Start a project with Infincode.' },
+  '/privacy': { title: 'Privacy Policy — Infincode', description: 'How Infincode handles your information.' },
 };

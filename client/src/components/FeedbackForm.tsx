@@ -110,7 +110,7 @@ export default function FeedbackForm() {
       <div className="field">
         <Label className="checkbox">
           <Input type="checkbox" checked={consent} onChange={(e) => { setConsent(e.target.checked); if (errors.consent) setErrors((er) => ({ ...er, consent: '' })); }} />
-          <span>I agree that CDS may display my feedback (name, company and role) on its website.</span>
+          <span>I agree that Infincode may display my feedback (name, company and role) on its website.</span>
         </Label>
         {err('consent')}
       </div>

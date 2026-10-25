@@ -12,7 +12,7 @@ let js = '', css = '';
 for (const f of out.outputFiles) { if (f.path.endsWith('.js')) js = f.text; else if (f.path.endsWith('.css')) css = f.text; }
 let html = fs.readFileSync('index.html', 'utf8');
 html = html.replace(/<script type="module"[^>]*><\/script>/, '').replace(/<link rel="icon"[^>]*>/, '').replace(/<meta[^>]*og:image[^>]*>/, '');
-const shim = `<script>(function(){var of=window.fetch;window.fetch=function(u,o){var url=typeof u==='string'?u:(u&&u.url)||'';if(url.indexOf('/api/')>-1&&url.indexOf('http')!==0){var b={ok:true};if(url.indexOf('/api/chat')>-1)b.reply="Hi! This is a preview of the CDS assistant. Once your Gemini API key is added to the backend, real answers appear here.";return new Promise(function(r){setTimeout(function(){r(new Response(JSON.stringify(b),{status:200,headers:{'Content-Type':'application/json'}}))},600)})}return of.apply(this,arguments)}})();</script>`;
+const shim = `<script>(function(){var of=window.fetch;window.fetch=function(u,o){var url=typeof u==='string'?u:(u&&u.url)||'';if(url.indexOf('/api/')>-1&&url.indexOf('http')!==0){var b={ok:true};if(url.indexOf('/api/chat')>-1)b.reply="Hi! This is a preview of the Infincode assistant. Once your Gemini API key is added to the backend, real answers appear here.";return new Promise(function(r){setTimeout(function(){r(new Response(JSON.stringify(b),{status:200,headers:{'Content-Type':'application/json'}}))},600)})}return of.apply(this,arguments)}})();</script>`;
 html = html.replace('</head>', `<style>${css}</style></head>`).replace('</body>', `${shim}<script>${js.replace(/<\/script>/g, '<\\/script>')}</script></body>`);
 fs.mkdirSync('/mnt/user-data/outputs', { recursive: true });
 fs.writeFileSync('/mnt/user-data/outputs/index.html', html);

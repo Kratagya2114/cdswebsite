@@ -1,4 +1,4 @@
-# Crafting Digital Solution (CDS) website
+# Infincode website
 
 React + TypeScript + Vite frontend, Node/Express backend (Nodemailer email + Gemini chatbot).
 

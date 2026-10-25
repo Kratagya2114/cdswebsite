@@ -11,7 +11,7 @@ export default function Footer() {
       <div className="container">
         <div className="footer__grid">
           <div className="footer__brand">
-            <div className="footer__big">Crafting<br />Digital <span>Solution.</span></div>
+            <div className="footer__big">Infin<span>code.</span></div>
             <p style={{ marginTop: 18, maxWidth: '44ch', color: '#cfcbe3' }}>{site.tagline}</p>
             <p>
               <a href={`mailto:${site.email}`}>{site.email}</a>

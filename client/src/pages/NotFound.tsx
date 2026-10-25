@@ -6,7 +6,7 @@ import Seo from '../components/Seo';
 export default function NotFound() {
   return (
     <div className="page">
-      <Seo title="Page not found — CDS" description="The page you’re looking for doesn’t exist." />
+      <Seo title="Page not found — Infincode" description="The page you’re looking for doesn’t exist." />
       <section className="page-hero">
         <div className="container">
           <span className="eyebrow">404</span>

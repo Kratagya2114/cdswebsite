@@ -20,7 +20,7 @@ interface Props {
 /** Sets page-specific <title>, description and Open Graph tags. */
 export default function Seo({ path, title, description }: Props) {
   const fallback = path ? pageMeta[path] : undefined;
-  const t = title ?? fallback?.title ?? 'Crafting Digital Solution (CDS)';
+  const t = title ?? fallback?.title ?? 'Infincode';
   const d = description ?? fallback?.description ?? '';
   useEffect(() => {
     document.title = t;

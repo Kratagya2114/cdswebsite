@@ -11,10 +11,30 @@ export const team: TeamMember[] = [
     name: 'Keshav Vyas',
     role: 'Founder / Full Stack Developer',
     photo: '/team/keshav.jpg',
-    bio: 'Founded Crafting Digital Solution to give ambitious businesses a technology partner that is honest, quick and genuinely invested in their success.',
+    bio: 'Founded Infincode to give ambitious businesses a technology partner that is honest, quick and genuinely invested in their success.',
     skills: ['Product thinking', 'Client partnership', 'Delivery'],
     tint: 'lilac',
     links: [],
+  },
+  // {
+  //   id: 'lakshya-joshi',
+  //   name: 'Lakshya joshi',
+  //   role: 'UI/UX Designer / BDE ',
+  //   photo: '/team/lakshya.jpg',
+  //   bio: 'Turns ideas into clear, friendly interfaces. From user flows and wireframes to polished Figma designs, they make sure every screen is easy to use, looks great on any device, and feels consistent across the product',
+  //   skills: ['Figma', 'UX research', 'Design systems'],
+  //   tint: 'blush',
+    
+  // },
+  {
+    id: 'kritagya-gami',
+    name: 'Kritagya Gami',
+    role: 'Co-Founder/Frontend Developer / QA Engineer',
+    photo: '/team/kratagya.jpg',
+    bio: 'Brings designs to life with fast, responsive and accessible interfaces. They build with React and TypeScript, care about clean, reusable code, and sweat the details that make a site feel smooth on both phones and desktops..',
+    skills: ['React', 'TypeScript', 'Accessibility'],
+    tint: 'sky',
+   
   },
   {
     id: 'lakshya-joshi',
@@ -25,16 +45,6 @@ export const team: TeamMember[] = [
     skills: ['Figma', 'UX research', 'Design systems'],
     tint: 'blush',
     
-  },
-  {
-    id: 'kritagya-gami',
-    name: 'Kritagya Gami',
-    role: 'Co-Founder/Frontend Developer / QA Engineer',
-    photo: '/team/kratagya.jpg',
-    bio: 'Brings designs to life with fast, responsive and accessible interfaces. They build with React and TypeScript, care about clean, reusable code, and sweat the details that make a site feel smooth on both phones and desktops..',
-    skills: ['React', 'TypeScript', 'Accessibility'],
-    tint: 'sky',
-   
   },
   {
     id: 'aditya-singh-bhati',
