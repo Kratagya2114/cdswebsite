@@ -10,13 +10,13 @@ export const config = {
     .map((s) => s.trim())
     .filter(Boolean),
   smtp: {
-    host: process.env.SMTP_HOST || 'smtp.gmail.com',
+    host: process.env.SMTP_HOST || 'smtp.titan.email',
     port: Number(process.env.SMTP_PORT) || 465,
     secure: bool(process.env.SMTP_SECURE, true),
-    user: process.env.SMTP_USER || 'keshavdeepakvyas@gmail.com',
+    user: process.env.SMTP_USER || 'info@infincode.org',
     pass: process.env.SMTP_PASS || '',
-    receiver: process.env.CONTACT_RECEIVER_EMAIL || 'keshavdeepakvyas@gmail.com',
-    sender: process.env.CONTACT_SENDER_EMAIL || process.env.SMTP_USER || 'keshavdeepakvyas@gmail.com',
+    receiver: process.env.CONTACT_RECEIVER_EMAIL || 'info@infincode.org',
+    sender: process.env.CONTACT_SENDER_EMAIL || process.env.SMTP_USER || 'info@infincode.org',
     sendAcknowledgment: bool(process.env.SEND_ACKNOWLEDGMENT, true),
   },
   gemini: {

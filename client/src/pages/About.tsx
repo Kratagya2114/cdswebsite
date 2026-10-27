@@ -83,12 +83,12 @@ export default function About() {
         </div>
       </section>
 
-      <section className="section">
+      {/* <section className="section">
         <div className="container">
           <SectionHead eyebrow="Team" title="The people behind Infincode"><Link to="/team" className="link-arrow">Full team <Icon name="upright" /></Link></SectionHead>
           <TeamGrid members={team.slice(0, 3)} />
         </div>
-      </section>
+      </section> */}
 
       <CtaBanner title="Let’s start a conversation." text="No pressure, no jargon — just tell us what you’re working on." />
     </div>

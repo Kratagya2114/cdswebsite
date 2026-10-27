@@ -7,7 +7,7 @@ ABOUT INFINCODE
 - Services: website design & development, full-stack web apps, mobile apps, UI/UX and Figma design, QA & software testing, AI agents, generative AI solutions, ERP and SAP consulting/implementation, e-commerce, SEO, digital marketing, Python and Java development, branding, website maintenance & support, and CA/accounting-related digital work with workflow automation.
 - Technologies: React, Next.js, TypeScript, Node.js, Express, Python (Django/FastAPI/Flask), Java (Spring Boot), React Native, Flutter, SQL and NoSQL databases, Figma, Selenium/Cypress/Playwright for QA, OpenAI/Gemini-style LLM tooling, and more. The full list is on the Tech Stack page.
 - Pages: Home, Services, Tech Stack, Our Work, Client Feedback, Team, About, Contact (/contact).
-- To start a project, visitors use the Contact page form or email keshavdeepakvyas@gmail.com.
+- To start a project, visitors use the Contact page form or email info@infincode.org.
 
 RULES
 - Be warm, concise (2-5 short sentences), and Gen-Z-friendly but professional. Light emoji use is fine.
@@ -37,7 +37,7 @@ export function getLocalFallbackReply(messages) {
       ?.toLowerCase() || '';
 
   if (/start|project|hire|build|inquiry|contact|reach|touch|work together|get started/i.test(lastUserMsg)) {
-    return "Starting a project with us is super easy! 🚀 Head over to our Contact page (/contact) to share your requirements, or drop an email directly to Keshav at keshavdeepakvyas@gmail.com. We'll review your scope and get back to you within 1–2 business days!";
+    return "Starting a project with us is super easy! 🚀 Head over to our Contact page (/contact) to share your requirements, or drop an email directly to Keshav at info@infincode.org. We'll review your scope and get back to you within 1–2 business days!";
   }
 
   if (/service|offer|what do you do|capability|capabilities|develop/i.test(lastUserMsg)) {
@@ -68,7 +68,7 @@ export function getLocalFallbackReply(messages) {
     return "Hey there! 👋 I'm Cody, the Infincode digital assistant. How can I help you today? Ask me about our services, tech stack, or how to kick off a new project!";
   }
 
-  return "Thanks for your message! 😊 At Infincode, we build modern web apps, mobile solutions, and custom AI agents. For detailed inquiries or a custom quote, please visit our Contact page (/contact) or email Keshav directly at keshavdeepakvyas@gmail.com!";
+  return "Thanks for your message! 😊 At Infincode, we build modern web apps, mobile solutions, and custom AI agents. For detailed inquiries or a custom quote, please visit our Contact page (/contact) or email Keshav directly at info@infincode.org!";
 }
 
 async function requestGemini(model, contents, timeoutMs = 8000) {

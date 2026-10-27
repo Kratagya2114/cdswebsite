@@ -10,7 +10,7 @@ import TechStack from './pages/TechStack';
 import Work from './pages/Work';
 import CaseStudy from './pages/CaseStudy';
 import Reviews from './pages/Reviews';
-import Team from './pages/Team';
+// import Team from './pages/Team';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Privacy from './pages/Privacy';
@@ -47,7 +47,7 @@ export default function App() {
           <Route path="/work" element={<Work />} />
           <Route path="/work/:slug" element={<CaseStudy />} />
           <Route path="/reviews" element={<Reviews />} />
-          <Route path="/team" element={<Team />} />
+          {/* <Route path="/team" element={<Team />} /> */}
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy" element={<Privacy />} />

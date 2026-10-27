@@ -75,7 +75,7 @@ export default function Header() {
           </div>
         </div>
       </header>
-      <div id="mobile-menu" ref={menuRef} className={`mobile-menu ${open ? 'is-open' : ''}`} aria-hidden={!open} {...(!open ? { inert: '' as unknown as boolean } : {})}>
+      <div id="mobile-menu" ref={menuRef} className={`mobile-menu ${open ? 'is-open' : ''}`} aria-hidden={!open} inert={!open}>
         <nav aria-label="Mobile">
           {nav.map((n) => (
             <NavLink key={n.to} to={n.to} end={n.to === '/'} className={({ isActive }) => `m-link ${isActive ? 'active' : ''}`}>

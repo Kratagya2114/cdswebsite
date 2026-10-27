@@ -2,7 +2,7 @@ export const site = {
   name: 'Infincode',
   short: 'Infincode',
   tagline: 'Where code meets infinite possibilities.',
-  email: 'keshavdeepakvyas@gmail.com',
+  email: 'info@infincode.org',
   founder: 'Keshav Vyas',
   // Add real profile URLs here. Empty ones are simply not rendered.
   socials: [] as { label: string; href: string }[],
@@ -14,7 +14,7 @@ export const nav = [
   { to: '/tech-stack', label: 'Tech Stack' },
   { to: '/work', label: 'Work' },
   { to: '/reviews', label: 'Reviews' },
-  { to: '/team', label: 'Team' },
+  // { to: '/team', label: 'Team' },
   { to: '/about', label: 'About' },
 ];
 

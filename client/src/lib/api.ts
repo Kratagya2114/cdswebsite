@@ -16,9 +16,12 @@ async function post<T extends ApiResult>(path: string, body: unknown, timeoutMs 
       body: JSON.stringify(body),
       signal: controller.signal,
     });
-    const data = (await res.json().catch(() => null)) as T | null;
+    const data = await res.json().catch(() => null) as T | null;
     if (data) return data;
-    return { ok: false, error: 'Unexpected response from the server.' } as T;
+    return {
+      ok: false,
+      error: `The server returned an unexpected response (HTTP ${res.status}). Please try again or email us directly.`,
+    } as T;
   } catch {
     return { ok: false, error: 'Could not reach the server. Please check your connection and try again.' } as T;
   } finally {

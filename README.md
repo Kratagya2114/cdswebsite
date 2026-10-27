@@ -17,7 +17,7 @@ Production: `npm run build` then `npm start`. The Express server serves `client/
 
 | Variable | What it is |
 | --- | --- |
-| `SMTP_PASS` | Gmail **App Password** for keshavdeepakvyas@gmail.com (Google Account > Security > 2-Step Verification > App passwords). Your normal Gmail password will not work. |
+| `SMTP_PASS` | Gmail **App Password** for info@infincode.org(Google Account > Security > 2-Step Verification > App passwords). Your normal Gmail password will not work. |
 | `GEMINI_API_KEY` | Key from https://aistudio.google.com/apikey |
 | `CLIENT_ORIGINS` | Only needed if the frontend is hosted on a different domain than the API |
 
